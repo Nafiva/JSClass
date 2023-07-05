@@ -1,3 +1,47 @@
+/*
+ name: Pig Latin
+ Author: Nafiva Jeza
+ Date: 07/04/23 
+ Pseudo-code: 
+function translateToPigLatin(word):
+    if word length is 0 or 1:
+        return "Input can't be translated."
+    
+    convert word to lowercase and store it in lowerWord
+    
+    define vowels as ['a', 'e', 'i', 'o', 'u']
+    
+    if lowerWord starts with a vowel:
+        return lowerWord + 'way'
+    
+    if lowerWord starts with two consonants:
+        return lowerWord from index 2 to end + lowerWord from index 0 to 1 + 'ay'
+    
+    return lowerWord from index 1 to end + lowerWord at index 0 + 'ay'
+
+
+function translatePhraseToPigLatin(phrase):
+    split phrase into words and store them in an array called words
+    
+    create an empty array called translations
+    
+    for each word in words:
+        translate the word using translateToPigLatin() and store it in translatedWord
+        add translatedWord to translations
+    
+    join the words in translations using a space and store the result in translatedPhrase
+    
+    return translatedPhrase
+
+
+get user input and store it in userInput
+
+translate userInput using translatePhraseToPigLatin() and store the result in translatedPhrase
+
+print translatedPhrase
+
+*/
+
 function translateToPigLatin(word) {
     // Check if input is empty or a single letter
     if (word.length === 0 || word.length === 1) {
