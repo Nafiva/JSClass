@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Js</title>
+</head>
+<body>
+
+    <h1>Student Data</h1>
+    <ul id="student-list"></ul>
+    <p>Total Students: <span id="total-students"></span></p>
+    <p>Lowest Score: <span id="lowest-score"></span></p>
+    <p>Highest Score: <span id="highest-score"></span></p>
+    <p>Average Score: <span id="average-score"></span></p>
+
+    <script>
+        var grades = "jim|25, sue|32, mary|34, ann|22, ted|28, frank|15, lisa|19, mike|30, ahn|26, vishaya|27";
+        var studentList = document.getElementById("student-list");
+        var totalStudents = document.getElementById("total-students");
+        var lowestScore = document.getElementById("lowest-score");
+        var highestScore = document.getElementById("highest-score");
+        var averageScore = document.getElementById("average-score");
+
+        // Process the student data
+        var students = grades.split(", ");
+        var studentData = students.map(function (student) {
+            var data = student.split("|");
+            return {
+                name: data[0].charAt(0).toUpperCase() + data[0].slice(1),
+                score: parseInt(data[1])
+            };
+        });
+
+        // Sort the student data in alphabetical order by name
+        studentData.sort(function(a, b) {
+            return a.name.localeCompare(b.name);
+        });
+
+        // Display each student's name and score
+        studentData.forEach(function (student) {
+            var listItem = document.createElement("li");
+            listItem.textContent = student.name + " - " + student.score;
+            studentList.appendChild(listItem);
+        });
+
+        // Calculate and display total number of students
+        totalStudents.textContent = studentData.length;
+
+        // Calculate and display lowest, highest, and average scores
+        var scores = studentData.map(function (student) {
+            return student.score;
+        });
+        lowestScore.textContent = Math.min(...scores);
+        highestScore.textContent = Math.max(...scores);
+        averageScore.textContent = (scores.reduce((sum, score) => sum + score, 0) / scores.length).toFixed(2);
+    </script>
+    
+</body>
+</html>
