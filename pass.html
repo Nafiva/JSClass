@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pass/Fail</title>
+</head>
+<body>
+    
+    <form>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required>
+      
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required>
+      
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+      
+        <button type="button" onclick="validateForm()">Check</button>
+    </form>
+      
+      <div id="validationMessage"></div>
+
+      <script>
+          function validatePassword(password) {
+            // Validate password criteria
+            // At least 8 characters, at least one uppercase letter, and at least one lowercase letter
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasLowercase = /[a-z]/.test(password);
+            const isValidLength = password.length >= 8;
+
+            return hasUppercase && hasLowercase && isValidLength;
+            }
+
+          function validateForm() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const password = document.getElementById('password').value;
+
+            // Check if first name and last name are not missing
+            if (!firstName || !lastName) {
+                showMessage('Please enter both first name and last name.');
+                return;
+            }
+
+            // Validate the password
+            if (!validatePassword(password)) {
+                showMessage('Invalid password. Password should have at least 8 characters, one uppercase letter, and one lowercase letter.');
+                return;
+            }
+
+            // All fields are valid
+            showMessage('Form entries are valid.');
+            }
+
+          function showMessage(message) {
+            const messageDiv = document.getElementById('validationMessage');
+            messageDiv.innerText = message;
+            }
+
+      </script>
+</body>
+</html>
