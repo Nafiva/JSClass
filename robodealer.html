@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Card Dealing Program</title>
+</head>
+<body>
+  <h1>Card Dealing Program</h1>
+  <div id="hand"></div>
+  <button onclick="dealCards()">Deal New Hand</button>
+
+  <script>
+    // Define the Card object with 'value' and 'suit' properties
+    function Card(value, suit) {
+      this.value = value;
+      this.suit = suit;
+    }
+
+    // Function to create a deck of 52 Card objects
+    function createDeck() {
+      const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Ace', 'Jack', 'Queen', 'King'];
+      const suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs'];
+      const deck = [];
+
+      for (const suit of suits) {
+        for (const value of values) {
+          deck.push(new Card(value, suit));
+        }
+      }
+
+      return deck;
+    }
+
+    // Function to get the name of the card (Ace, Jack, Queen, King) if it's a face card
+    function getCardName(card) {
+      return typeof card.value === 'number' ? card.value : card.value.charAt(0).toUpperCase() + card.value.slice(1);
+    }
+
+    // Function to display the hand on the HTML page
+    function displayHand(hand) {
+      const handContainer = document.getElementById('hand');
+      handContainer.innerHTML = '';
+
+      for (const card of hand) {
+        const cardName = getCardName(card);
+        const cardInfo = document.createElement('p');
+        cardInfo.textContent = `${cardName} of ${card.suit}`;
+        handContainer.appendChild(cardInfo);
+      }
+    }
+
+    // Global variable to store the deck of cards
+    const deck = createDeck();
+
+    // Function to deal 5 random cards from the deck
+    function dealCards() {
+      const hand = [];
+      const drawnIndexes = new Set();
+
+      while (hand.length < 5) {
+        const randomIndex = Math.floor(Math.random() * 52);
+        if (!drawnIndexes.has(randomIndex)) {
+          drawnIndexes.add(randomIndex);
+          hand.push(deck[randomIndex]);
+        }
+      }
+
+      displayHand(hand);
+    }
+  </script>
+</body>
+</html>
